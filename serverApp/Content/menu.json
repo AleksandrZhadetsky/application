@@ -1,0 +1,64 @@
+{
+  "level": "0",
+  "name": "root",
+  "content": "root",
+  "children": [
+    {
+      "level": "1",
+      "name": "1.0",
+      "content": "1.0",
+      "children": [
+        {
+          "level": "2",
+          "name": "1.1",
+          "content": "1.1",
+          "children": []
+        },
+        {
+          "level": "2",
+          "name": "1.2",
+          "content": "1.2",
+          "children": []
+        }
+      ]
+    },
+    {
+      "level": "1",
+      "name": "2.0",
+      "content": "2.0",
+      "children": [
+        {
+          "level": "2",
+          "name": "2.1",
+          "content": "2.1",
+          "children": []
+        },
+        {
+          "level": "2",
+          "name": "2.2",
+          "content": "2.2",
+          "children": []
+        }
+      ]
+    },
+    {
+      "level": "1",
+      "name": "3.0",
+      "content": "3.0",
+      "children": [
+        {
+          "level": "2",
+          "name": "3.1",
+          "content": "3.1",
+          "children": []
+        },
+        {
+          "level": "2",
+          "name": "3.2",
+          "content": "3.2",
+          "children": []
+        }
+      ]
+    }
+  ]
+}
