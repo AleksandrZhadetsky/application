@@ -1,3 +1,8 @@
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.IdentityModel.Tokens;
+using serverApp.Infrastructure;
+using serverApp.Services;
+using System.Text;
 
 namespace serverApp
 {

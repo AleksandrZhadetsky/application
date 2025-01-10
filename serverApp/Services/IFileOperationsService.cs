@@ -1,6 +1,6 @@
-﻿using application.Server.Models;
+﻿using serverApp.Models;
 
-namespace application.Server.Services
+namespace serverApp.Services
 {
     public interface IFileOperationsService
     {

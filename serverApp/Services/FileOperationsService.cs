@@ -1,7 +1,7 @@
-﻿using application.Server.Models;
+﻿using serverApp.Models;
 using Newtonsoft.Json;
 
-namespace application.Server.Services
+namespace serverApp.Services
 {
     public class FileOperationsService : IFileOperationsService
     {

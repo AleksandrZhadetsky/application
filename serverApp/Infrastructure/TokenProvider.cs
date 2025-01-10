@@ -1,10 +1,10 @@
-﻿using application.Server.Models;
+﻿using serverApp.Models;
 using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
 
-namespace application.Server.Infrastructure
+namespace serverApp.Infrastructure
 {
     public sealed class TokenProvider(IConfiguration configuration)
     {

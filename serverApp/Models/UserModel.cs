@@ -1,4 +1,4 @@
-﻿namespace application.Server.Models
+﻿namespace serverApp.Models
 {
     public class UserModel
     {
