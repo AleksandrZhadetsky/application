@@ -12,10 +12,7 @@ namespace serverApp
         {
             var builder = WebApplication.CreateBuilder(args);
 
-            // Add services to the container.
-
             builder.Services.AddSingleton<TokenProvider>();
-            builder.Services.AddScoped<IFileOperationsService, FileOperationsService>();
             builder.Services.AddCors(options =>
             {
                 options.AddPolicy(name: "clientPolicy",
@@ -26,10 +23,12 @@ namespace serverApp
                                   });
             });
             builder.Services.AddControllers();
+
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
-			
+            builder.Services.AddScoped<IFileOperationsService, FileOperationsService>();
+
             builder.Services.AddAuthentication(config => {
                 config.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
                 config.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
@@ -43,18 +42,17 @@ namespace serverApp
                     IssuerSigningKey = new SymmetricSecurityKey(
                         Encoding.UTF8.GetBytes(builder.Configuration["JWT:secret"])
                     ),
-                    ValidateIssuer = true,
-                    ValidateAudience = true,
-                    ValidateLifetime = true,
-                    ValidIssuer = builder.Configuration["JWT:issuer"],
-                    ValidAudience = builder.Configuration["JWT:audience"],
+                    ValidateIssuer = false,
+                    ValidateAudience = false,
+                    ValidateLifetime = false,
+                    //ValidIssuer = builder.Configuration["JWT:issuer"],
+                    //ValidAudience = builder.Configuration["JWT:audience"],
                     ClockSkew = TimeSpan.Zero
                 };
             });
 
             var app = builder.Build();
 
-            // Configure the HTTP request pipeline.
             if (app.Environment.IsDevelopment())
             {
                 app.UseSwagger();
@@ -62,8 +60,6 @@ namespace serverApp
             }
 
             app.UseHttpsRedirection();
-
-            app.UseAuthorization();
 
             app.UseCors("clientPolicy");
 
