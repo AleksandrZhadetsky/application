@@ -7,22 +7,28 @@ namespace serverApp.Controllers
 {
     [ApiController]
     [Route("api/auth")]
-    public class AuthController(ILogger<AuthController> logger, TokenProvider tokenProvider) : ControllerBase
+    public class AuthController(ILogger<AuthController> logger, TokenProvider tokenProvider, IConfiguration configuration) : ControllerBase
     {
         private readonly ILogger<AuthController> logger = logger;
         private readonly TokenProvider tokenProvider = tokenProvider;
+        private readonly IConfiguration configuration = configuration;
 
         [HttpPost]
         [Route("login")]
         public IActionResult Login(UserModel userModel)
         {
-            var token = tokenProvider.GenerateToken(userModel);
-
-            return Ok(new
+            if (userModel != null && IsAdmin(userModel))
             {
-                token,
-                user = userModel
-            });
+                var token = tokenProvider.GenerateToken(userModel);
+
+                return Ok(new
+                {
+                    token,
+                    user = userModel
+                });
+            }
+
+            return Unauthorized();
         }
 
         [HttpGet]
@@ -31,6 +37,15 @@ namespace serverApp.Controllers
         public IActionResult IdentityCheck()
         {
             return Ok("hello admin!");
+        }
+
+        private bool IsAdmin(UserModel user)
+        {
+            var adminName = configuration["admin:name"];
+            var adminEmail = configuration["admin:email"];
+            var adminPassword = configuration["admin:secret"];
+
+            return user.Email == adminEmail && user.Name == adminName && user.Password == adminPassword;
         }
     }
 }
